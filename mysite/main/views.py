@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+# from django.http import HttpResponse
 
 # Create your views here.
 
@@ -7,21 +7,40 @@ from django.http import HttpResponse
 # def main(request):
 #     return HttpResponse('Hello Word')
 
+# 測試02
+# def main(request):
+#     '''
+#     render the main page(呈現主頁)
+#     '''
+#     html = '''
+#     <!doctype html>
+#     <html>
+#     <head>
+#     <title>部落格</title>
+#     <meta charset='utf-8'>
+#     </head>
+#     <body>
+#     <p>這是HTML版的HELLO WORD</p>
+#     </body>
+#     </hteml>
+#     '''
+#     return HttpResponse(html)
+
 
 def main(request):
     '''
-    render the main page(呈現主業)
+    render the main page
     '''
-    html = '''
-    <!doctype html>
-    <html>
-    <head>
-    <title>部落格</title>
-    <meta charset='utf-8'>
-    </head>
-    <body>
-    <p>這是HTML版的HELLO WORD</p>
-    </body>
-    </hteml>
+    context = {'like': 'Django 很棒喔'}
+    return render(request, 'main/main.html', context)
+
+
+
+
+def about(request):
     '''
-    return HttpResponse(html)
+    render the main page
+    '''
+    return render(request, 'main/about.html')
+
+
