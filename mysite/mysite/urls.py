@@ -14,8 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include, re_path
+from main import views
 
+
+# urlpatterns : diango利用python的串列資料結構來儲存各個URL的對應
+# 每個URL對應利用path()或re_path()來設定
 urlpatterns = [
+    # 如果URL格式為admain/..，admin.site.urls模組進一步比對URL，此為Django內建管理者模組
     path('admin/', admin.site.urls),
+    # 如果URL格式為main/..，main.urls模組第二階段比對，空間名稱main
+    path('main/', include('main.urls', namespace='main')),
+    # re是正規表示法'.*'任何字元任何字
+    re_path('.*', views.main)
 ]
