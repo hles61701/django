@@ -23,8 +23,13 @@ from main import views
 urlpatterns = [
     # 如果URL格式為admain/..，admin.site.urls模組進一步比對URL，此為Django內建管理者模組
     path('admin/', admin.site.urls),
-    # 如果URL格式為main/..，main.urls模組第二階段比對，空間名稱main
+
+    # 第二組階段比對
+    path('article/', include('article.urls', namespace='article')),
+
+    # 如果URL格式為main/..，main.urls模組第三階段比對，空間名稱main
     path('main/', include('main.urls', namespace='main')),
+
     # re是正規表示法'.*'任何字元任何字
     re_path('.*', views.main)
 ]
