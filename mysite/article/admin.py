@@ -5,7 +5,7 @@ from article.models import Article, Comment
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['Article', 'content']  # 讓清單顯示2欄位
+    list_display = ['Article', 'content', 'pubDateTime']  # 讓清單顯示2+1欄位
     list_display_links = ['Article']  # 設定資料連結欄位
     list_filter = ['Article', 'content']  # 點選文章標題就會列出所屬留言
     search_fields = ['content']  # 出現搜尋欄位
