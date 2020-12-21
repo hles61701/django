@@ -10,16 +10,29 @@
 
 {% block content %}
 <br>
-{% for article in articles %}
+<!-- {% for article in articles %}
     <h3>{{ article.title }}</h3>
     <p>發表時間：{{ article.pubDateTime|date:'Y-m-d H:i' }}</p>
     <div class="articleContent">{{ article.content|linebreaks|truncatechars_html:30 }}</div>
-<!-- linebreaks|truncatechars_html:30 : 分段|只顯示30個字-->
+linebreaks|truncatechars_html:30 :分段
     <hr>
 
+{% endfor %} -->
+
+{% for article, comments in articles.items %}
+<h3>{{ article.title }}</h3>
+<p>發表時間：{{ article.pubDateTime|date:'Y-m-d H:i' }}</p>
+<div class="articleContent">{{ article.content|linebreaks|truncatechars_html:30 }}</div>
+
+{% for comment in comments %}
+<div class="commentDiv">
+    <span class="comment">{{ comment.content }}</span>
+    <br>
+    <span class="commentTime">{{ comment.pubDateTime|date:'m月d日 H:i' }}</span>
+</div>
 {% endfor %}
-
-
+<hr>
+{% endfor %}
 {% endblock %}
 <!-- <!DOCTYPE html>
 {% load static %}
