@@ -10,6 +10,8 @@
 
 {% block content %}
 <br>
+<p><a class="btn" href="{% url 'article:articleCreate' %}">新增文章</a>
+</p>
 <!-- {% for article in articles %}
     <h3>{{ article.title }}</h3>
     <p>發表時間：{{ article.pubDateTime|date:'Y-m-d H:i' }}</p>

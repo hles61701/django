@@ -18,3 +18,16 @@ def article(request):
     context = {'articles': articles}
     # 利用範本變數article將查詢集至範本，修改範本以顯示文章資料在context區塊加到內容
     return render(request, 'article/article.html', context)
+
+
+def articleCreate(request):
+    '''
+    Create a new article instance
+        1. If method is GET, render an empty form
+        2. If method is POST,
+            * vaildate the form and display error message if the form is invalid
+            * else , save it to the model and redirect to the article page
+    '''
+
+    # TODO: finish the code
+    return render(request, 'article/article.htm')
