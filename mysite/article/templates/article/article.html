@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'article/css/article.css' %}">
+{% endblock %}
+
+{% block heading %}歡迎光臨{% endblock %}
+
+
+{% block content %}
+<br>
+{% for article in articles %}
+    <h3>{{ article.title }}</h3>
+    <p>發表時間：{{ article.pubDateTime|date:'Y-m-d H:i' }}</p>
+    <div class="articleContent">{{ article.content|linebreaks|truncatechars_html:30 }}</div>
+<!-- linebreaks|truncatechars_html:30 : 分段|只顯示30個字-->
+    <hr>
+
+{% endfor %}
+
+
+{% endblock %}
+<!-- <!DOCTYPE html>
 {% load static %}
 <html lang="zh-hant">
 <head>
@@ -11,4 +34,4 @@
 {% include 'main/menu.html' %}
 <h2>部落格說 -- Hello World!</h2>
 </body>
-</html>
+</html> -->
