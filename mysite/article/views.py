@@ -41,9 +41,9 @@ def articleCreate(request):
     # POST
     articleForm = ArticleForm(request.POST)
     print(request.POST)
-    # 如果驗證錯誤
-    if not articleForm.is_valid():
-        return render(request, template, {'articleForm': articleForm})
+    # # 如果驗證錯誤
+    # if not articleForm.is_valid():
+    #     return render(request, template, {'articleForm': articleForm})
 
     articleForm.save()
     return article(request)

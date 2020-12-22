@@ -8,11 +8,11 @@
 {% block heading %}新增文章{% endblock %}
 
 {% block content %}
-<form mothed='post' action="{% url 'article:articleCreate' %}">
+<form method='post' action="{% url 'article:articleCreate' %}">
     <!-- 表單安全機制 -->
     {% csrf_token %}
     <!-- .as_p每個欄位要用<p></p>包住 -->
     {{ articleForm.as_p }}
     <input type="submit" value="送出">
 </form>
-{% endblock%}
+{% endblock %}
