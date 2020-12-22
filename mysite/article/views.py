@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from article.models import Article, Comment
+from article.forms import ArticleForm
 
 # Create your views here.
 
@@ -29,5 +30,20 @@ def articleCreate(request):
             * else , save it to the model and redirect to the article page
     '''
 
-    # TODO: finish the code
-    return render(request, 'article/article.htm')
+    # # TODO: finish the code
+    # return render(request, 'article/article.html') # 測試
+
+    template = 'article/articleCreate.html'
+    if request.method == 'GET':
+        # print(ArticleForm()) 可以看到表單預設結構是table
+        return render(request, template, {'articleForm': ArticleForm()})
+
+    # POST
+    articleForm = ArticleForm(request.POST)
+    print(request.POST)
+    # 如果驗證錯誤
+    if not articleForm.is_valid():
+        return render(request, template, {'articleForm': articleForm})
+
+    articleForm.save()
+    return article(request)
