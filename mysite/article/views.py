@@ -92,3 +92,16 @@ def articleUpdate(request, articleId):
     articleForm.save()
     messages.success(request, '文章已修改')
     return redirect('article:articleRead', articleId=articleId)
+
+
+def articleDelete(request, articleId):
+    '''
+    '''
+    if request == 'GET':
+        return render('article:article')
+
+    # POST
+    article = get_object_or_404(Article, id=articleId)
+    article.delete()
+    messages.success(request, '文章已刪除')
+    return redirect('article:article')

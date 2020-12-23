@@ -10,6 +10,7 @@ urlpatterns = [
 
     path('articleUpdate/<int:articleId>/',
          views.articleUpdate, name='articleUpdate'),
-
+    path('articleDelete/<int:articleId>/',
+         views.articleDelete, name='articleDelete'),
 
 ]
