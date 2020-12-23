@@ -22,7 +22,7 @@ linebreaks|truncatechars_html:30 :分段
 {% endfor %} -->
 
 {% for article, comments in articles.items %}
-<h3>{{ article.title }}</h3>
+<h3><a href="{% url 'article:articleRead' article.id %}">{{ article.title }}</a></h3>
 <p>發表時間：{{ article.pubDateTime|date:'Y-m-d H:i' }}</p>
 <div class="articleContent">{{ article.content|linebreaks|truncatechars_html:30 }}</div>
 

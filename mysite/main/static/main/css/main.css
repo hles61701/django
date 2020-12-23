@@ -46,3 +46,8 @@ ul#menu li {
     background-color: #fbd9d8;
     border: thin solid red;
 }
+
+/* Misc */
+.inlineBlock{
+    display: inline-block;
+}
