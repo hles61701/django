@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from article.models import Article, Comment
 from article.forms import ArticleForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -40,10 +41,12 @@ def articleCreate(request):
 
     # POST
     articleForm = ArticleForm(request.POST)
-    print(request.POST)
-    # # 如果驗證錯誤
-    # if not articleForm.is_valid():
-    #     return render(request, template, {'articleForm': articleForm})
+
+    # 如果驗證錯誤
+    if not articleForm.is_valid():
+        return render(request, template, {'articleForm': articleForm})
 
     articleForm.save()
-    return article(request)
+    # return article(request)
+    messages.success(request, '文章已新增')
+    return redirect('article:article')  # 轉向到article
