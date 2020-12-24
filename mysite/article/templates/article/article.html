@@ -10,8 +10,11 @@
 
 {% block content %}
 <br>
+<!-- 新增文章 -->
 <p><a class="btn" href="{% url 'article:articleCreate' %}">新增文章</a>
 </p>
+
+
 <!-- {% for article in articles %}
     <h3>{{ article.title }}</h3>
     <p>發表時間：{{ article.pubDateTime|date:'Y-m-d H:i' }}</p>
@@ -21,14 +24,18 @@ linebreaks|truncatechars_html:30 :分段
 
 {% endfor %} -->
 
+
+<!-- 文章顯示迴圈 -->
 {% for article, comments in articles.items %}
 <h3 class="inlineBlock"><a href="{% url 'article:articleRead' article.id %}">{{ article.title }}</a></h3>
 
+<!-- 文章刪除 -->
 <form method="post" action="{% url 'article:articleDelete' article.id %}" class="inlineBlock">
     {% csrf_token %}
-    <input type="submit" class="btn" value="刪除">
+    <input type="submit" class="btn deleteConfirm" value="刪除">
 </form>
 
+<!-- 顯示發表時間 -->
 <p>發表時間：{{ article.pubDateTime|date:'Y-m-d H:i' }}</p>
 <div class="articleContent">{{ article.content|linebreaks|truncatechars_html:30 }}</div>
 
@@ -42,6 +49,14 @@ linebreaks|truncatechars_html:30 :分段
 <hr>
 {% endfor %}
 {% endblock %}
+
+{% block script %}
+<script src='{% static 'main/js/deleteConfirm.js' %}'></script>
+{% endblock%}
+
+
+
+
 <!-- <!DOCTYPE html>
 {% load static %}
 <html lang="zh-hant">

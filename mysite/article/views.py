@@ -96,6 +96,9 @@ def articleUpdate(request, articleId):
 
 def articleDelete(request, articleId):
     '''
+    Delete the article instance:
+        1. Render the article page if the method is GET
+        2. Get the article to delete; redirect to 404 if not found
     '''
     if request == 'GET':
         return render('article:article')
