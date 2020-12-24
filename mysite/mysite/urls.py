@@ -24,6 +24,8 @@ urlpatterns = [
     # 如果URL格式為admain/..，admin.site.urls模組進一步比對URL，此為Django內建管理者模組
     path('admin/', admin.site.urls),
 
+    path('account/', include('account.urls', namespace='account')),
+
     # 第二組階段比對
     path('article/', include('article.urls', namespace='article')),
 

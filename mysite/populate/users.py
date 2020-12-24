@@ -1,5 +1,6 @@
 from populate import base
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User 改為客製化User model
+from account.models import User
 
 
 def populate():

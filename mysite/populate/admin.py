@@ -1,5 +1,7 @@
 from populate import base
-from django.contrib.auth.models import User
+# 原先的資料填充程式是使用預設User model 現在需要改為匯入account App的客製化User model
+# from django.contrib.auth.models import User
+from account.models import User
 
 
 def populate():
