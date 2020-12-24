@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from article.models import Article, Comment
 from article.forms import ArticleForm
 from django.contrib import messages
+from django.db.models.query_utils import Q
 
 # Create your views here.
 
@@ -108,3 +109,14 @@ def articleDelete(request, articleId):
     article.delete()
     messages.success(request, '文章已刪除')
     return redirect('article:article')
+
+
+def articleSearch(request):
+    '''
+    '''
+    searchTerm = request.GET.get('searchTerm')
+    articles = Article.objects.filter(
+        Q(title__icontains=searchTerm) | Q(content__icontains=searchTerm))
+
+    context = {'articles': articles, 'searchTerm': searchTerm}
+    return render(request, 'article/articleSearch.html', context)

@@ -12,5 +12,7 @@ urlpatterns = [
          views.articleUpdate, name='articleUpdate'),
     path('articleDelete/<int:articleId>/',
          views.articleDelete, name='articleDelete'),
+    path('articleSearch/', views.articleSearch, name='articleSearch'),
+
 
 ]

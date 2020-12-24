@@ -9,11 +9,15 @@
 
 
 {% block content %}
-<br>
-<!-- 新增文章 -->
-<p><a class="btn" href="{% url 'article:articleCreate' %}">新增文章</a>
-</p>
+{% include 'article/searchForm.html' %}
 
+
+<!-- 新增文章 -->
+<p class="inlineBlock" ><a class="btn" href="{% url 'article:articleCreate' %}">新增文章</a>
+</p>
+<br>
+<br>
+<hr>
 
 <!-- {% for article in articles %}
     <h3>{{ article.title }}</h3>
