@@ -113,6 +113,9 @@ def articleDelete(request, articleId):
 
 def articleSearch(request):
     '''
+    Search for articles:
+        1. Get the "searchTerm" from the HTML form
+        2. Use "searchTerm" for filtering
     '''
     searchTerm = request.GET.get('searchTerm')
     articles = Article.objects.filter(
@@ -120,3 +123,16 @@ def articleSearch(request):
 
     context = {'articles': articles, 'searchTerm': searchTerm}
     return render(request, 'article/articleSearch.html', context)
+
+
+def articleLike(request, articleId):
+    '''
+    Add the user to the 'like' field:
+        1. Get the article; redirect to 404 if not found
+        2. If the user does not exist in the "like" field, add him/her
+        3. Finally, call articleRead() funtion to render the article
+    '''
+    article = get_object_or_404(Article, id=articleId)
+    if request.user not in article.likes.all():
+        article.likes.add(request.user)
+    return articleRead(request, articleId)

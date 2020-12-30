@@ -12,6 +12,16 @@
 <p>發表時間：{{ article.pubDateTime|date:'Y-m-d H-i'}}</p>
 <div class="articleContent">{{ article.content|linebreaks }}</div>
 
+
+<!-- 按讚連結 -->
+<p class="like">
+    <img id="like" src="{% static 'main/img/img03.jpg' %}" alt="Like">{{ article.likes.count }}
+        {% if user.is_authenticated %}
+            <a href="{% url 'article:articleLike' article.id%}" >讚</a>
+        {% endif %}
+</p>
+
+
 {% for comment in comments %}
 <div class="commentDiv">
     <span class="comment">{{ comment.content }}</span>

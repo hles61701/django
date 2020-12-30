@@ -43,6 +43,12 @@ linebreaks|truncatechars_html:30 :分段
 <p>發表時間：{{ article.pubDateTime|date:'Y-m-d H:i' }}</p>
 <div class="articleContent">{{ article.content|linebreaks|truncatechars_html:30 }}</div>
 
+<!-- 顯示按讚圖示及人數 -->
+<p class="like">
+    <img id="like" src="{% static 'main/img/img03.jpg' %}" alt="Like">{{ article.likes.count }}
+</p>
+
+
 {% for comment in comments %}
 <div class="commentDiv">
     <span class="comment">{{ comment.content }}</span>

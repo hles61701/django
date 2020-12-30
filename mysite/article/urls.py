@@ -13,6 +13,7 @@ urlpatterns = [
     path('articleDelete/<int:articleId>/',
          views.articleDelete, name='articleDelete'),
     path('articleSearch/', views.articleSearch, name='articleSearch'),
+    path('articleLike/<int:articleId>/', views.articleLike, name='articleLike'),
 
 
 ]
