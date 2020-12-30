@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_logon
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 
 from account.forms import UserForm
 
@@ -27,6 +28,7 @@ def register(request):
 
 def login(request):
     '''
+    Login an existing user
     '''
     template = 'account/login.html'
     if request.method == 'GET':
@@ -45,6 +47,15 @@ def login(request):
         return render(request, template)
 
     # login success
-    auth_logon(request, user)
+    auth_login(request, user)
     messages.success(request, '登入成功')
+    return redirect('main:main')
+
+
+def logout(request):
+    '''
+    Logout the user
+    '''
+    auth_logout(request)
+    messages.success(request, '歡迎再度光臨')
     return redirect('main:main')
