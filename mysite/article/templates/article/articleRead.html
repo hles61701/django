@@ -24,6 +24,7 @@
 
 {% for comment in comments %}
 <div class="commentDiv">
+    <span class="commentAuthor">{{ comment.user.fullName }}</span>
     <span class="comment">{{ comment.content }}</span>
     <br>
     <span class="commentTime">{{ comment.pubDateTime|date:'Y-m-d H-i'}}</span>

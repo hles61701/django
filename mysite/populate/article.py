@@ -1,5 +1,6 @@
 from populate import base
 from article.models import Article, Comment
+from account.models import User
 
 titles = ['如果像電腦科學家一樣思考', '10分鐘內學好python', '簡單學習Django']
 comments = ['文章真棒', '並不認同你的觀點', '借分享', '學好一個程式語言或框架不容易']
@@ -10,6 +11,8 @@ def populate():
     Article.objects.all().delete()
     Comment.objects.all().delete()
 
+    admin = User.objects.get(is_superuser=True)
+
     for title in titles:
         article = Article()
         article.title = title
@@ -17,7 +20,8 @@ def populate():
             article.content += title + '\n'
         article.save()
         for comment in comments:
-            Comment.objects.create(Article=article, content=comment)
+            Comment.objects.create(
+                Article=article, user=admin, content=comment)
     print('done')
 
 

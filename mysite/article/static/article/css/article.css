@@ -11,11 +11,15 @@
 
 }
 
-.comment{
+.comment, .commentAuthor{
     font-size: 0.8em;
 
 }
 
+.commentAuthor{
+    font-weight: bold;
+    color: #186caf;
+}
 .commentTime{
     font-size: 0.6em;
     color: #777777;
