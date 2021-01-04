@@ -131,3 +131,6 @@ STATIC_URL = '/static/'
 
 # 改用客製化的User model
 AUTH_USER_MODEL = 'account.User'
+
+# 都使用者被@login_required拒絕後,將頁面轉到登入頁面
+LOGIN_URL = '/account/login/'

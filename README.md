@@ -1,8 +1,8 @@
 # Django
 #### 先在虛擬環境安裝套件：
-* django 
-* pylint 
-* pylint_django 
+* django
+* pylint
+* pylint_django
 * autopep8
 * psycopg2 (連線到postgresSQL)
 
@@ -22,3 +22,5 @@
 * 將重複出現的資料放到base template,然後定義一些區域標籤(block tag),讓其他範本可以置換區塊內容
 * 其他的範本繼承基礎範本,並各自設定區塊的內容
 
+##### 後端安全系統
+* 在function前加上 `@login_required` ,表示必須為登入狀態才能執行該function

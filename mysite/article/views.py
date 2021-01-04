@@ -3,6 +3,7 @@ from article.models import Article, Comment
 from article.forms import ArticleForm
 from django.contrib import messages
 from django.db.models.query_utils import Q
+from django.contrib.auth.decorators import login_required  # 限制權限使用函數
 
 # Create your views here.
 
@@ -128,6 +129,7 @@ def articleSearch(request):
 
 
 # ------文章按讚---------
+@login_required
 def articleLike(request, articleId):
     '''
     Add the user to the 'like' field:
@@ -142,6 +144,7 @@ def articleLike(request, articleId):
 
 
 # ------文章留言板---------
+@login_required
 def commentCreate(request, articleId):
     '''
     Create a comment for an article:
@@ -165,6 +168,7 @@ def commentCreate(request, articleId):
 
 
 # ------文章留言修改---------
+@login_required
 def commentUpate(request, commentId):
     '''
     Update a comment:
@@ -194,6 +198,7 @@ def commentUpate(request, commentId):
 
 
 # ------文章留言刪除---------
+@login_required
 def commentDelete(request, commentId):
     '''
     Delete a comment:
