@@ -8,7 +8,12 @@
 {% block heading %}閱讀文章{% endblock %}
 {% block content %}
 <h3 class="inlineBlock">{{ article.title }}</h3>
+
+<!-- 文章修改(superuser才有權限) -->
+{% if user.is_superuser %}
 <a href="{% url 'article:articleUpdate' article.id %}" class="btn inlineBlock">修改</a>
+{% endif %}
+
 <p>發表時間：{{ article.pubDateTime|date:'Y-m-d H-i'}}</p>
 <div class="articleContent">{{ article.content|linebreaks }}</div>
 

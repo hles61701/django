@@ -12,9 +12,11 @@
 {% include 'article/searchForm.html' %}
 
 
-<!-- 新增文章 -->
+<!-- 新增文章(superuser才有權限) -->
+{% if user.is_superuser %}
 <p class="inlineBlock" ><a class="btn" href="{% url 'article:articleCreate' %}">新增文章</a>
 </p>
+{% endif %}
 <br>
 <br>
 <hr>
@@ -33,11 +35,13 @@ linebreaks|truncatechars_html:30 :分段
 {% for article, comments in articles.items %}
 <h3 class="inlineBlock"><a href="{% url 'article:articleRead' article.id %}">{{ article.title }}</a></h3>
 
-<!-- 文章刪除 -->
+<!-- 文章刪除(superuser才有權限) -->
+{% if user.is_superuser %}
 <form method="post" action="{% url 'article:articleDelete' article.id %}" class="inlineBlock">
     {% csrf_token %}
     <input type="submit" class="btn deleteConfirm" value="刪除">
 </form>
+{% endif %}
 
 <!-- 顯示發表時間 -->
 <p>發表時間：{{ article.pubDateTime|date:'Y-m-d H:i' }}</p>
