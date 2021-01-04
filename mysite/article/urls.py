@@ -16,6 +16,8 @@ urlpatterns = [
     path('articleLike/<int:articleId>/', views.articleLike, name='articleLike'),
     path('commentCreate/<int:articleId>/',
          views.commentCreate, name='commentCreate'),
+    path('commentUpate/<int:commentId>/',
+         views.commentUpate, name='commentUpdate'),
 
 
 ]

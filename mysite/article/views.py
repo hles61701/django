@@ -159,7 +159,8 @@ def commentCreate(request, articleId):
         return redirect('article:articleRead', articleId=articleId)
 
     article = get_object_or_404(Article, id=articleId)
-    Comment.objects.create(Article=article, user=request.user)
+    Comment.objects.create(
+        Article=article, user=request.user, content=comment)
     return redirect('article:articleRead', articleId=articleId)
 
 
@@ -172,3 +173,21 @@ def commentUpate(request, commentId):
         3. If the comment's author is not the user, return
         4. If comment is empty, delete the comment, else update the comment
     '''
+    commentToUpdate = get_object_or_404(Comment, id=commentId)
+    article = get_object_or_404(Article, id=commentToUpdate.Article.id)
+    if request.method == 'GET':
+        return articleRead(request, article.id)
+
+    # POST
+    if commentToUpdate.user != request.user:
+        messages.error(request, '無修改權限')
+        return redirect('article:articleRead', articleId=article.id)
+
+    comment = request.POST.get('comment', '').strip()  # 刪除舊留言
+    if not comment:
+        commentToUpdate.delete()
+        # 如果沒有留言內容就刪除整篇留言
+    else:
+        commentToUpdate.content = comment
+        commentToUpdate.save()
+    return redirect('article:articleRead', articleId=article.id)
