@@ -95,6 +95,7 @@ def articleUpdate(request, articleId):
     return redirect('article:articleRead', articleId=articleId)
 
 
+# ------文章刪除---------
 def articleDelete(request, articleId):
     '''
     Delete the article instance:
@@ -111,6 +112,7 @@ def articleDelete(request, articleId):
     return redirect('article:article')
 
 
+# ------文章搜尋---------
 def articleSearch(request):
     '''
     Search for articles:
@@ -125,6 +127,7 @@ def articleSearch(request):
     return render(request, 'article/articleSearch.html', context)
 
 
+# ------文章按讚---------
 def articleLike(request, articleId):
     '''
     Add the user to the 'like' field:
@@ -136,3 +139,36 @@ def articleLike(request, articleId):
     if request.user not in article.likes.all():
         article.likes.add(request.user)
     return articleRead(request, articleId)
+
+
+# ------文章留言板---------
+def commentCreate(request, articleId):
+    '''
+    Create a comment for an article:
+        1. Get the "comment" from the HTML form
+        2. Store it to database
+    '''
+    if request.method == 'GET':
+        return articleRead(request, articleId)
+
+    # POST
+    comment = request.POST.get('comment')
+    if comment:
+        comment = comment.strip()
+    if not comment:
+        return redirect('article:articleRead', articleId=articleId)
+
+    article = get_object_or_404(Article, id=articleId)
+    Comment.objects.create(Article=article, user=request.user)
+    return redirect('article:articleRead', articleId=articleId)
+
+
+# ------文章留言刪除---------
+def commentUpate(request, commentId):
+    '''
+    Update a comment:
+        1. Get the comment to update and its article; redirect to 404 if not found
+        2. If it is a 'GET' request, return
+        3. If the comment's author is not the user, return
+        4. If comment is empty, delete the comment, else update the comment
+    '''
