@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.urls.base import reverse  # 將具名URL轉為實際的URL格式
 # from django.http import HttpResponse
 
 # Create your views here.
@@ -35,8 +37,6 @@ def main(request):
     return render(request, 'main/main.html', context)
 
 
-
-
 def about(request):
     '''
     render the main page
@@ -44,3 +44,10 @@ def about(request):
     return render(request, 'main/about.html')
 
 
+def admin_required(func):
+    def auth(request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(request, '請以管理者登入')
+            return redirect(reverse('account:login') + '?next=' + request.get_full_path())
+        return func(request, *args, **kwargs)
+    return auth
