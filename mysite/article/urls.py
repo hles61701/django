@@ -18,6 +18,8 @@ urlpatterns = [
          views.commentCreate, name='commentCreate'),
     path('commentUpate/<int:commentId>/',
          views.commentUpate, name='commentUpdate'),
+    path('commentDelete/<int:commentId>/',
+         views.commentDelete, name='commentDelete'),
 
 
 ]

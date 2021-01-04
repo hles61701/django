@@ -34,6 +34,10 @@
             <input type="text" name="comment" value="{{ comment.content}}">
             <input type="submit" class="btn" value="修改">
         </form>
+        <form method="post" action="{% url 'article:commentDelete' comment.id %}" class="inlineBlock">
+            {% csrf_token %}
+            <input type="submit" class="btn deleteConfirm" value="刪除">
+        </form>
     {% endif %}
      <br>
     <span class="commentTime">{{ comment.pubDateTime|date:'Y-m-d H-i'}}</span>
@@ -49,4 +53,9 @@
     </form>
     <br><br>
 {% endif %}
+{% endblock %}
+
+
+{% block script %}
+<script src="{% static 'main/js/deleteConfirm.js' %}"></script>
 {% endblock %}
