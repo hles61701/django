@@ -1,3 +1,4 @@
+### Heroku連結 ：  https://django-blog-wei.herokuapp.com/
 # Django
 ## 前置作業
 #### 先在虛擬環境安裝套件：
