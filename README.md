@@ -1,4 +1,5 @@
 # Django
+## 前置作業
 #### 先在虛擬環境安裝套件：
 * django
 * pylint
@@ -17,6 +18,8 @@
 `django-admin.py startproject mysite`
 * 切到 mysite 資料夾後啟動django內建伺服器
 `python manage.py runserver`
+
+## 觀念
 ##### 三振法則
 * 確認每個範本(template)裡重複的部分
 * 將重複出現的資料放到base template,然後定義一些區域標籤(block tag),讓其他範本可以置換區塊內容
