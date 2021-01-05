@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +25,9 @@ SECRET_KEY = '70=&kgqg+1ffvp0kt+gm6%=d#!201h48*h&2e05ejqn&cc30)k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+if 'DYNO' in os.environ:    # Running on Heroku
+    DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -79,16 +83,23 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blogdb',
-        'USER': 'dbuser',
-        'PASSWORD': 'dbuser',
-        'HOST': 'localhost',
-        'PORT': ''
+if DEBUG:   # Running on the development environment (在開發環境上運行)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'blogdb',
+            'USER': 'dbuser',
+            'PASSWORD': 'dbuser',
+            'HOST': 'localhost',
+            'PORT': ''
+        }
     }
-}
+else:  # Running on Heroku
+    # Parse database configuration from $DATABASE_URL (從$ DATABASE_URL解析數據庫配置)
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config()}
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Password validation
@@ -134,3 +145,6 @@ AUTH_USER_MODEL = 'account.User'
 
 # 都使用者被@login_required拒絕後,將頁面轉到登入頁面
 LOGIN_URL = '/account/login/'
+
+# For Heroku deployment (對Heroku部署)
+STATIC_ROOT = 'staticfiles'
